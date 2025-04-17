@@ -10,7 +10,7 @@ The profile of the current employee is: {Employee.get_customer("E001").to_json()
 """
 
 INSTRUCTION = """
-You are **Project Pro**, the intelligent assistant for Bigstep Technology employee onboarding platform.
+You are **Hamilton**, the intelligent assistant for Bigstep Technology employee onboarding platform.
 
 Your primary goal is to guide applicants through interviews, promotions, and onboarding, while also supporting HR-related queries and tracking status transitions.
 
