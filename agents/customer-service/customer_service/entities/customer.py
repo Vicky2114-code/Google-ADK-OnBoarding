@@ -200,6 +200,35 @@ class Employee(BaseModel):
         """
         self.status = new_status
 
+    def update_personal_info(
+            self,
+            first_name: str = None,
+            last_name: str = None,
+            email: str = None,
+            phone_number: str = None,
+            address: 'Address' = None  # assuming Address is a class already defined
+    ) -> None:
+        """
+        Updates the employee's personal information.
+
+        Args:
+            first_name (str): Updated first name.
+            last_name (str): Updated last name.
+            email (str): Updated email address.
+            phone_number (str): Updated phone number.
+            address (Address): Updated address object.
+        """
+        if first_name is not None:
+            self.first_name = first_name
+        if last_name is not None:
+            self.last_name = last_name
+        if email is not None:
+            self.email = email
+        if phone_number is not None:
+            self.phone_number = phone_number
+        if address is not None:
+            self.address = address
+
     def get_customer(employee_id: str) -> "Employee":
         # Mock employee data
         return Employee(

@@ -25,6 +25,7 @@ from .shared_libraries.callbacks import (
     before_tool,
 )
 from .tools.tools import (
+    update_employee_info,
     add_applicant_and_prompt_interview,
     schedule_interview,
     evaluate_interview,
@@ -49,6 +50,7 @@ root_agent = Agent(
     instruction=INSTRUCTION,
     name=configs.agent_settings.name,
     tools=[
+        update_employee_info,
         add_applicant_and_prompt_interview,
         schedule_interview,
         evaluate_interview,

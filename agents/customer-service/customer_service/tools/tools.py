@@ -3,7 +3,9 @@
 import logging
 import uuid
 from datetime import datetime
+from typing import Optional
 
+from ..entities.customer import Employee,Address
 logger = logging.getLogger(__name__)
 
 
@@ -155,4 +157,53 @@ def add_applicant_and_prompt_interview(name: str, email: str, role: str) -> dict
         "status": "Applicant",
         "created_at": datetime.utcnow().isoformat(),
         "next_step": "Would you like to schedule an interview for this applicant?"
+    }
+def update_employee_info(
+    employee_id: str,
+    first_name: Optional[str] = None,
+    last_name: Optional[str] = None,
+    email: Optional[str] = None,
+    phone: Optional[str] = None,
+    address: Optional[str] = None
+) -> dict:
+    """
+    Updates the employee's profile fields if provided.
+
+    Args:
+        employee_id (str): The unique ID of the employee.
+        first_name (Optional[str]): New first name (if any).
+        last_name (Optional[str]): New last name (if any).
+        email (Optional[str]): New email (if any).
+        phone (Optional[str]): New phone number (if any).
+        address (Optional[str]): New address (if any).
+
+    Returns:
+        dict: Confirmation of updated fields.
+    """
+    employee = Employee.get_customer(employee_id)
+    if not employee:
+        return {"error": f"Employee with ID {employee_id} not found."}
+
+    updates = {}
+
+    if first_name:
+        employee.first_name = first_name
+        updates["first_name"] = first_name
+    if last_name:
+        employee.last_name = last_name
+        updates["last_name"] = last_name
+    if email:
+        employee.email = email
+        updates["email"] = email
+    if phone:
+        employee.phone_number = phone
+        updates["phone_number"] = phone
+    if address:
+        employee.address.street = address
+        updates["address"] = address
+
+    return {
+        "employee_id": employee_id,
+        "updated_fields": updates,
+        "status": "Profile updated successfully"
     }
